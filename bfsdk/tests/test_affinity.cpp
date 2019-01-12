@@ -18,9 +18,10 @@
 
 #include <catch/catch.hpp>
 #include <bfaffinity.h>
+#include <thread>
 
 TEST_CASE("set_affinity")
 {
     CHECK(set_affinity(0) == 0);
-    CHECK(set_affinity(31) == -1);
+    CHECK(set_affinity(std::thread::hardware_concurrency()) == -1);
 }
