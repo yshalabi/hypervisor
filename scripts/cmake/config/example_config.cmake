@@ -233,10 +233,14 @@ if(ENABLE_HYPERVISOR_EXAMPLE_MSR_BITMAP)
 endif()
 
 if(ENABLE_EXTENDED_APIS_EXAMPLE_HOOK)
-    set_bfm_vmm(example_vmm)
-    list(APPEND EXTENSION
-        ${CMAKE_CURRENT_LIST_DIR}/extended_apis_example_hook
-    )
+    if(ENABLE_EXTENDED_APIS)
+        set_bfm_vmm(example_vmm)
+        list(APPEND EXTENSION
+            ${CMAKE_CURRENT_LIST_DIR}/extended_apis_example_hook
+        )
+    else()
+        message(FATAL_ERROR "Configuration error. ENABLE_EXTENDED_APIS_EXAMPLE_HOOK set without ENABLE_EXTENDED_APIS.")
+    endif()
 endif()
 
 # ------------------------------------------------------------------------------
